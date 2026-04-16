@@ -1,4 +1,4 @@
-import math
+#E eu achei que teria alguma dificuldade nessa matéria...
 
 #Q_1 
 def head(L):
@@ -139,17 +139,52 @@ def fun_greater_n_list(L, n, new_list=[]):
         new_list.append(head(L))
     return fun_greater_n_list(tail(L), n, new_list)
 
-#Q_18 bruno legora nem sabe fazer isso pprt
-def invert_list(L, new_list = L):
-    print(f"Before {L}")
+#Q_18 bruno legora nem sabe fazer isso pprt, de verdade eu te odeio Bruno... 
+def invert_list(L, new_list = [], start = 0, end= -1):
+    
+    if not new_list:
+        new_list = L
+    
     if not L:
         return new_list 
+    
     else:
+        primeiro = L[0]
+        ultimo = L[-1]
+        new_list[end] = primeiro
+        new_list[start] = ultimo
+        return invert_list(tail(init(L)),new_list, start + 1, end - 1)
 
-        new_list[-1] = L[0]
-        new_list[0] = L[-1]
-        return invert_list(tail(init(L)),new_list)
-L = [1, 2, 3, 4, 5, 6, 7]
-L = invert_list(L)
+#Q_19 
+def gera_palindromo(palavra, nova_palavra = [], atual_antiga = 0, atual_nova = 0, original_size = 0):
+    palavra = list(palavra) 
+    if not nova_palavra:
+        nova_palavra = palavra #Os dois apontam para o mesmo endereço
+        atual_antiga = list_size(palavra) #Definimos o tamanho atual como sendo esse e vamo adicionando e removendo 
+        atual_nova = atual_antiga #Com isso vamos chamando recursivamente a 
+        original_size = atual_antiga 
+    if list_size(nova_palavra) == original_size * 2:
+        nova_palavra = ''.join(nova_palavra)
+        return str(nova_palavra) 
+    else:
+        nova_palavra.append(palavra[atual_antiga - 1])
+        return gera_palindromo(palavra, nova_palavra, atual_antiga - 1, atual_nova + 1, original_size)
 
-print(L)
+#Q_20
+def recursion_strip(L_1, L_2):
+    if not L_1:
+        return L_2 
+    else:
+        item_to_remove = head(L_1)
+        if exists(item_to_remove, L_2):
+            L_2.remove(item_to_remove)
+        return recursion_strip(tail(L_1), L_2)
+
+#Q_21
+def consoant_list(first_string, consoants, vowals = ['a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U']): 
+    first_string = recursion_strip(list(consoants), list(first_string))  #Tiramos as consoantes
+    first_string = recursion_strip(vowals, list(first_string))
+    if not first_string:
+        return True
+    else:
+        return False 
