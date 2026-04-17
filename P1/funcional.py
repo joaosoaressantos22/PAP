@@ -75,7 +75,6 @@ def list_size(L, soma=0):
 
 #Q_11
 def eh_primo(n, atual=2): #N é o valor que queremos verificar! 
-    #n = math.ceil(math.sqrt(n)) #Só para a pilha ficar menor
     if n == atual: #Caso do 2, ou caso ele nn ache nenhum outro 
         return True
     elif n < atual:
@@ -139,22 +138,13 @@ def fun_greater_n_list(L, n, new_list=[]):
         new_list.append(head(L))
     return fun_greater_n_list(tail(L), n, new_list)
 
-#Q_18 bruno legora nem sabe fazer isso pprt, de verdade eu te odeio Bruno... 
-def invert_list(L, new_list = [], start = 0, end= -1):
-    
-    if not new_list:
-        new_list = L
-    
+#Q_18
+def invert_list(L):
     if not L:
-        return new_list 
-    
+        return L
     else:
-        primeiro = L[0]
-        ultimo = L[-1]
-        new_list[end] = primeiro
-        new_list[start] = ultimo
-        return invert_list(tail(init(L)),new_list, start + 1, end - 1)
-
+        return [last(L)] + invert_list(init(L))
+        
 #Q_19 
 def gera_palindromo(palavra, nova_palavra = [], atual_antiga = 0, atual_nova = 0, original_size = 0):
     palavra = list(palavra) 
@@ -188,3 +178,29 @@ def consoant_list(first_string, consoants, vowals = ['a', 'A', 'e', 'E', 'i', 'I
         return True
     else:
         return False 
+#Q_22_AUX
+def compare(string, con):
+    if not string:
+        return False
+    else not con:
+        return True 
+    if head(string) == head(con):
+        return compare(tail(string), tail(con))
+    else:
+        return compare(tail(string), con)
+
+#Q_22
+def matches(strings, con):
+    func = lambda x: compare(x, con)
+    return list(filter(func, strings))
+
+#Q_23
+def first_prime_greater(n):
+    if not eh_primo(n + 1):
+        return first_prime_greater(n + 1)
+    else:
+        return n + 1  
+#Q_24
+def primes(n):
+    pass
+
