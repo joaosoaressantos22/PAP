@@ -300,5 +300,15 @@ def perfects(n, atual= 3):
             return [atual] + perfects(n, atual+ 1) 
         else:
             return perfects(n, atual + 1)
-print(perfects(500))
+#Q_31
+def prod_escalar(v1, v2):
+    if not v1:
+        return 0
+    if not v2:
+        return 0
+    
+    return head(v1) * head(v2) + prod_escalar(tail(v1), tail(v2))
+
+
+print(prod_escalar([2, 3, 4], [5, 4, 10]))
 
