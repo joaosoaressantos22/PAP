@@ -309,6 +309,32 @@ def prod_escalar(v1, v2):
     
     return head(v1) * head(v2) + prod_escalar(tail(v1), tail(v2))
 
+#Q_36_aux
+def encode_aux(string, char ='', times = 1): 
+    if not string:
+        return [(times, char)]
+    if head(string) != char:
+        return [(times, char)] + encode_aux(tail(string),head(string))
+    else:
+        return encode_aux(tail(string), head(string), times + 1)
+#Q_36
+def encode(string):
+    return encode_aux(string, head(string))
 
-print(prod_escalar([2, 3, 4], [5, 4, 10]))
+#Q_37_aux
+def decode_aux(sub_L, timer =0):
+    if timer == 0 or not sub_L:
+        return 
+    else:
+        print(last(sub_L), end ='')
+        return decode_aux(sub_L, timer - 1)
+#Q_37 
+def decode(L):
+    if not L or head(L) is None:
+        return  
+    else:
+        decode_aux(head(L), int(head(head(L))))
+        return decode(tail(L))
+
+decode(encode("aaaabccaadeeee"))
 
