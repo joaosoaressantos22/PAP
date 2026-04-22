@@ -239,4 +239,40 @@ def join_token(n, l):
     from functools import reduce
 
     return reduce(fun, l)
-print(join_token(1,[[2],[3],[4,5,6]]))
+
+#Q_28_AUX
+def split_half_1(n, l, count=0):
+    if count == n //2:
+        return []
+    else:
+        return [head(l)] + split_half_1(n, tail(l), count + 1) 
+
+def split_half_2(n, l, count=0):
+    if count == n//2:
+        return []
+    else:
+        return split_half_2(n, init(l), count + 1) + [last(l)]
+
+#Q_28
+def split_half(l):
+    if len(l) % 2 == 0:
+        return [split_half_1(len(l), l), split_half_2(len(l), l)] 
+    else:
+        return [split_half_1(len(l) + 1, l), split_half_2(len(l), l)] 
+
+#Q_29_AUX 
+def pyths_aux(n, primer= 2, segun = 2):
+    if primer >= n:
+        return []
+    elif segun >= n:
+        return pyths_aux(n, primer + 1, 2)
+    if ((primer ** 2) + (segun **2)) < n ** 2:
+        return pyths_aux(n, primer, segun + 1)
+    elif ((primer ** 2) + (segun **2)) == n** 2:
+        return [(primer, segun, n), (segun, primer, n)]
+    elif ((primer ** 2) + (segun **2)) > n ** 2:
+        return pyths_aux(n, primer + 1, 2)
+#Q_29
+def pyths(n):
+    return pyths_aux(n)
+print(pyths(2))
