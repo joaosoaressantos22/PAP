@@ -233,19 +233,10 @@ def split_token(n, l):
     elif head(l) == n:
         return [split_token(n, tail(l))]
 
-def join_token_aux(n, sub_l, aux=[]):
-    if not sub_l:
-        return aux
-    if head(sub_l) == n:
-        return join_token_aux(n, tail(sub_l), [aux])])
-    else:
-        return join_token_aux(n, tail(sub_l), aux + [head(sub_l)])
-
 #Q_27 DE VDD ENTENDI FOI NAD!
 def join_token(n, l):
-    if not l:
-        return []
-    else:
-        return join_token_aux(n, head(l))
+    fun = lambda acc, item: acc + [n] + item
+    from functools import reduce
 
-print(split_token(2, [1,2,3,4,2,5,67,8,9,0,3]))
+    return reduce(fun, l)
+print(join_token(1,[[2],[3],[4,5,6]]))
