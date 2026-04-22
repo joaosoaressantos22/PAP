@@ -275,4 +275,30 @@ def pyths_aux(n, primer= 2, segun = 2):
 #Q_29
 def pyths(n):
     return pyths_aux(n)
-print(pyths(2))
+#Q_30_AUX_1
+def fatores(n, divisor=1):
+    if n == 0 or n <= divisor:
+        return []
+    else:
+        if n % divisor == 0: #É um fator do numero
+            return [divisor] + fatores(n, divisor + 1)
+        else:
+            return fatores(n, divisor + 1)
+
+def sum_list(l):
+    if not l:
+        return 0
+    else:
+        return head(l) + sum_list(tail(l))
+#Q_30
+def perfects(n, atual= 3):
+    x = fatores(atual)
+    if not x or atual == n:
+        return []
+    else:
+        if (sum_list(x) == atual):
+            return [atual] + perfects(n, atual+ 1) 
+        else:
+            return perfects(n, atual + 1)
+print(perfects(500))
+
