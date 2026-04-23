@@ -141,9 +141,9 @@ def fun_greater_n_list(L, n, new_list=[]):
 #Q_18
 def invert_list(L):
     if not L:
-        return L
+        return '' 
     else:
-        return [last(L)] + invert_list(init(L))
+        return last(L) + invert_list(init(L))
         
 #Q_19 
 def gera_palindromo(palavra, nova_palavra = [], atual_antiga = 0, atual_nova = 0, original_size = 0):
@@ -309,6 +309,43 @@ def prod_escalar(v1, v2):
     
     return head(v1) * head(v2) + prod_escalar(tail(v1), tail(v2))
 
+#Q_33
+def is_palindrome(string):
+    if (invert_list(string) == string):
+        return True
+    return False
+
+#Q_34_AUX
+def compress_aux(sub_string, actual_char, string_to_return):
+    if not sub_string:
+        return string_to_return
+
+    if (head(sub_string) == actual_char):
+        return compress_aux(tail(sub_string), actual_char, string_to_return)
+    else:
+        return compress_aux(tail(sub_string), head(sub_string), string_to_return + head(sub_string))
+
+
+#Q_34
+def compress(string):
+    return compress_aux(string, '', "")
+
+#Q_35_AUX
+def pack_aux(l, char, new_list, temp_list):
+    if not l or not char:
+        return new_list 
+
+    if head(l) != char and char != None: #New_list vai ser agora a new_list anterior mais a temp_list
+        
+        return pack_aux(tail(l), head(l), new_list + [temp_list], [head(l)])
+    
+    else:
+       return pack_aux(tail(l),  head(l), new_list, temp_list + [head(l)])
+
+#Q_35
+def pack(l):
+    return pack_aux(l, head(l), [], [])
+
 #Q_36_aux
 def encode_aux(string, char ='', times = 1): 
     if not string:
@@ -336,5 +373,4 @@ def decode(L):
         decode_aux(head(L), int(head(head(L))))
         return decode(tail(L))
 
-decode(encode("aaaabccaadeeee"))
-
+print(pack(['a', 'a', 'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e', 'e']))
