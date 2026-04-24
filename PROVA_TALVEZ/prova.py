@@ -1,3 +1,5 @@
+
+from functools import reduce
 def head(L):
     if not L:
         return None 
@@ -66,6 +68,22 @@ def new_reduce(func, lista):
 
 def somar(acc, item):
     return acc + item
-numeros = [1, 2, 3, 4]
-resultado = new_reduce(somar, numeros)
-print(resultado)
+
+def counter(L, item, acc=0):
+    
+    if not L:
+        return acc
+    if item == head(L):
+        return counter(tail(L), item, acc + 1)
+    else:
+        return  counter(tail(L), item, acc )
+
+
+#SELECTION SORT FAZENDO O TESTE. FUNCIONA SEM ELEMENTOS REPETIDOS, FODASSE!
+def selection_sort(L):
+    if not L:
+        return []
+    min_value = reduce(lambda x, y: x if x<y else y, L)
+    return [min_value] * counter(L, min_value) + selection_sort(list(filter(lambda x: x != min_value, L)))
+
+print(selection_sort([94, 54, 57, 57, 92, 91, 101, 101, 24, 23, 21, 21, 12, 19, 71, 73, 73, 494, 1101, 1, 1, 5, 7, 99]))
