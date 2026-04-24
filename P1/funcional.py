@@ -373,4 +373,6 @@ def decode(L):
         decode_aux(head(L), int(head(head(L))))
         return decode(tail(L))
 
-print(pack(['a', 'a', 'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e', 'e']))
+#print(pack(['a', 'a', 'a', 'a', 'b', 'b', 'b', 'c', 'd', 'e', 'e']))
+
+print(calculate_e(10))
